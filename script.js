@@ -1,6 +1,16 @@
 // INITIALISASI UTAMA AOS DIJALANKAN DI LINE NOMOR SATU
 AOS.init({ duration: 700, once: true, offset: 50 });
 
+/* ---------------- GLOBAL WHATSAPP CLEANER URL HELPER ---------------- */
+// Fungsi cerdas pengubah leading 08 menjadi format internasional resmi WhatsApp (628)
+function getCleanWaUrl(number, message) {
+  let cleaned = number.replace(/\D/g, ''); 
+  if (cleaned.startsWith('0')) {
+    cleaned = '62' + cleaned.substring(1); 
+  }
+  return `https://wa.me/${cleaned}?text=${encodeURIComponent(message)}`;
+}
+
 /* ---------------- DATABASE KATALOG 10 PAKET PERAWATAN ---------------- */
 const paketProducts = [
   { id: 0, img: "Produk Paket/Foto 1.png", name: "Paket Glowing Premium Darkspot", type: "paket", price: "Rp 370.000" },
@@ -17,42 +27,42 @@ const paketProducts = [
 
 /* ---------------- DATABASE KATALOG 31 PRODUK SATUAN ---------------- */
 const satuanProducts = [
-  { id: 10, img: "Produk Satuan/Foto 1.png", name: "Gold Jelly Whitening Premium", type: "satuan", price: "Rp 265.000" },
-  { id: 11, img: "Produk Satuan/Foto 2.png", name: "Whitening Booster Luxe For Dark Spot Serum", type: "satuan", price: "Rp 345.000" },
-  { id: 12, img: "Produk Satuan/Foto 3.png", name: "Serum Aura White Luxe Peel", type: "satuan", price: "Rp 245.000" },
-  { id: 13, img: "Produk Satuan/Foto 4.png", name: "Toner Glowing Dian Glow", type: "satuan", price: "Rp 90.000" },
-  { id: 14, img: "Produk Satuan/Foto 5.png", name: "Milk Cleanser Normal Skin", type: "satuan", price: "Rp 89.000" },
-  { id: 15, img: "Produk Satuan/Foto 6.png", name: "Derma Acne Facial Wash", type: "satuan", price: "Rp 90.000" },
-  { id: 16, img: "Produk Satuan/Foto 7.png", name: "Serum Acne Prone", type: "satuan", price: "Rp 189.000" },
-  { id: 17, img: "Produk Satuan/Foto 8.png", name: "Premium Day Sunscreen Whitening Luxe", type: "satuan", price: "Rp 160.000" },
-  { id: 18, img: "Produk Satuan/Foto 9.png", name: "Premium Whitening Booster & Anti Aging", type: "satuan", price: "Rp 190.000" },
-  { id: 19, img: "Produk Satuan/Foto 10.png", name: "Acne Glowing Toner", type: "satuan", price: "Rp 100.000" },
-  { id: 20, img: "Produk Satuan/Foto 11.png", name: "Acne Glow Day Cream", type: "satuan", price: "Rp 140.000" },
-  { id: 21, img: "Produk Satuan/Foto 12.png", name: "Premium Calendula Toner", type: "satuan", price: "Rp 110.000" },
-  { id: 22, img: "Produk Satuan/Foto 13.png", name: "Whitening Luxury Night Cream", type: "satuan", price: "Rp 140.000" },
-  { id: 23, img: "Produk Satuan/Foto 14.png", name: "Acne Glow Night Cream", type: "satuan", price: "Rp 140.000" },
-  { id: 24, img: "Produk Satuan/Foto 15.png", name: "Acne Glowing Facial Wash", type: "satuan", price: "Rp 100.000" },
-  { id: 25, img: "Produk Satuan/Foto 16.png", name: "Hydraluxe Crystal Lip Serum", type: "satuan", price: "Rp 185.000" },
-  { id: 26, img: "Produk Satuan/Foto 17.png", name: "Glowing Spray", type: "satuan", price: "Rp 130.000" },
-  { id: 27, img: "Produk Satuan/Foto 18.png", name: "Milk Cleanser Acne", type: "satuan", price: "Rp 89.000" },
-  { id: 28, img: "Produk Satuan/Foto 19.png", name: "Serum Acne Luxe White Glow Premium", type: "satuan", price: "Rp 325.000" },
-  { id: 29, img: "Produk Satuan/Foto 20.png", name: "Caviar De Luxe Moisturizer", type: "satuan", price: "Rp 245.000" },
-  { id: 30, img: "Produk Satuan/Foto 21.png", name: "Moisturizer Dermalux Acne", type: "satuan", price: "Rp 199.000" },
-  { id: 31, img: "Produk Satuan/Foto 22.png", name: "Derma Acne Lotion", type: "satuan", price: "Rp 100.000" },
-  { id: 32, img: "Produk Satuan/Foto 23.png", name: "Face Wash Glowing", type: "satuan", price: "Rp 90.000" },
-  { id: 33, img: "Produk Satuan/Foto 24.png", name: "SheetMask Whitening Glow DNA Salmon", type: "satuan", price: "Rp 38.000" },
-  { id: 34, img: "Produk Satuan/Foto 25.png", name: "Premium Face Wash", type: "satuan", price: "Rp 110.000" },
-  { id: 35, img: "Produk Satuan/Foto 26.png", name: "Perfect Glow Cream", type: "satuan", price: "Rp 245.000" },
-  { id: 36, img: "Produk Satuan/Foto 27.png", name: "Vit C20 Collagen Glow", type: "satuan", price: "Rp 245.000" },
-  { id: 37, img: "Produk Satuan/Foto 28.png", name: "Derma Acne Face Toner", type: "satuan", price: "Rp 90.000" },
-  { id: 38, img: "Produk Satuan/Foto 29.png", name: "Advance Eye Night Complex", type: "satuan", price: "Rp 185.000" },
-  { id: 39, img: "Produk Satuan/Foto 30.png", name: "Clay Mask Charcoal With Niacinamide", type: "satuan", price: "Rp 129.000" },
-  { id: 40, img: "Produk Satuan/Foto 31.png", name: "Ultimate Dark Spot Booster Night Cream", type: "satuan", price: "Rp 170.000" }
+  { id: 10, img: "Produk Satuan/Foto 1.jpg", name: "Gold Jelly Whitening Premium", type: "satuan", price: "Rp 265.000" },
+  { id: 11, img: "Produk Satuan/Foto 2.jpg", name: "Whitening Booster Luxe For Dark Spot Serum", type: "satuan", price: "Rp 345.000" },
+  { id: 12, img: "Produk Satuan/Foto 3.jpg", name: "Serum Aura White Luxe Peel", type: "satuan", price: "Rp 245.000" },
+  { id: 13, img: "Produk Satuan/Foto 4.jpg", name: "Toner Glowing Dian Glow", type: "satuan", price: "Rp 90.000" },
+  { id: 14, img: "Produk Satuan/Foto 5.jpg", name: "Milk Cleanser Normal Skin", type: "satuan", price: "Rp 89.000" },
+  { id: 15, img: "Produk Satuan/Foto 6.jpg", name: "Derma Acne Facial Wash", type: "satuan", price: "Rp 90.000" },
+  { id: 16, img: "Produk Satuan/Foto 7.jpg", name: "Serum Acne Prone", type: "satuan", price: "Rp 189.000" },
+  { id: 17, img: "Produk Satuan/Foto 8.jpg", name: "Premium Day Sunscreen Whitening Luxe", type: "satuan", price: "Rp 160.000" },
+  { id: 18, img: "Produk Satuan/Foto 9.jpg", name: "Premium Whitening Booster & Anti Aging", type: "satuan", price: "Rp 190.000" },
+  { id: 19, img: "Produk Satuan/Foto 10.jpg", name: "Acne Glowing Toner", type: "satuan", price: "Rp 100.000" },
+  { id: 20, img: "Produk Satuan/Foto 11.jpg", name: "Acne Glow Day Cream", type: "satuan", price: "Rp 140.000" },
+  { id: 21, img: "Produk Satuan/Foto 12.jpg", name: "Premium Calendula Toner", type: "satuan", price: "Rp 110.000" },
+  { id: 22, img: "Produk Satuan/Foto 13.jpg", name: "Whitening Luxury Night Cream", type: "satuan", price: "Rp 140.000" },
+  { id: 23, img: "Produk Satuan/Foto 14.jpg", name: "Acne Glow Night Cream", type: "satuan", price: "Rp 140.000" },
+  { id: 24, img: "Produk Satuan/Foto 15.jpg", name: "Acne Glowing Facial Wash", type: "satuan", price: "Rp 100.000" },
+  { id: 25, img: "Produk Satuan/Foto 16.jpg", name: "Hydraluxe Crystal Lip Serum", type: "satuan", price: "Rp 185.000" },
+  { id: 26, img: "Produk Satuan/Foto 17.jpg", name: "Glowing Spray", type: "satuan", price: "Rp 130.000" },
+  { id: 27, img: "Produk Satuan/Foto 18.jpg", name: "Milk Cleanser Acne", type: "satuan", price: "Rp 89.000" },
+  { id: 28, img: "Produk Satuan/Foto 19.jpg", name: "Serum Acne Luxe White Glow Premium", type: "satuan", price: "Rp 325.000" },
+  { id: 29, img: "Produk Satuan/Foto 20.jpg", name: "Caviar De Luxe Moisturizer", type: "satuan", price: "Rp 245.000" },
+  { id: 30, img: "Produk Satuan/Foto 21.jpg", name: "Moisturizer Dermalux Acne", type: "satuan", price: "Rp 199.000" },
+  { id: 31, img: "Produk Satuan/Foto 22.jpg", name: "Derma Acne Lotion", type: "satuan", price: "Rp 100.000" },
+  { id: 32, img: "Produk Satuan/Foto 23.jpg", name: "Face Wash Glowing", type: "satuan", price: "Rp 90.000" },
+  { id: 33, img: "Produk Satuan/Foto 24.jpg", name: "SheetMask Whitening Glow DNA Salmon", type: "satuan", price: "Rp 38.000" },
+  { id: 34, img: "Produk Satuan/Foto 25.jpg", name: "Premium Face Wash", type: "satuan", price: "Rp 110.000" },
+  { id: 35, img: "Produk Satuan/Foto 26.jpg", name: "Perfect Glow Cream", type: "satuan", price: "Rp 245.000" },
+  { id: 36, img: "Produk Satuan/Foto 27.jpg", name: "Vit C20 Collagen Glow", type: "satuan", price: "Rp 245.000" },
+  { id: 37, img: "Produk Satuan/Foto 28.jpg", name: "Derma Acne Face Toner", type: "satuan", price: "Rp 90.000" },
+  { id: 38, img: "Produk Satuan/Foto 29.jpg", name: "Advance Eye Night Complex", type: "satuan", price: "Rp 185.000" },
+  { id: 39, img: "Produk Satuan/Foto 30.jpg", name: "Clay Mask Charcoal With Niacinamide", type: "satuan", price: "Rp 129.000" },
+  { id: 40, img: "Produk Satuan/Foto 31.jpg", name: "Ultimate Dark Spot Booster Night Cream", type: "satuan", price: "Rp 170.000" }
 ];
 
 const products = [...paketProducts, ...satuanProducts];
 
-/* ---------------- Database Slider, Testimoni & Peta ---------------- */
+/* ---------------- Database Arrays Pendukung Grid ---------------- */
 const treatments = [
   { img: "Treatment/Foto 3.jpeg", alt: "Face Treatment Daftar Harga Bagian 1", category: "face" },
   { img: "Treatment/Foto 4.jpeg", alt: "Face Treatment Daftar Harga Bagian 2", category: "face" },
@@ -74,9 +84,7 @@ const jobs = [
   {img:"Lowongan/Foto 3.jpeg", alt:"Lowongan Pekerjaan 3"}
 ];
 
-// Sinkronisasi urutan array cabang slider & peta lokasi (0=PTK, 1=KTG, 2=SKW, 3=STG)
-const branchNames = ["Cabang Pontianak", "Cabang Ketapang", "Cabang Singkawang", "Cabang Sintang"];
-
+// DATA LINK MAPS DAN WHATSAPP MAPS CANVAS (Poros Sinkronisasi 0=PTK, 1=KTG, 2=SKW, 3=STG)
 const mapBranchesData = [
   { name: "Dian Glow Pontianak", embedUrl: "https://maps.google.com/maps?q=Jl.%20Pangeran%20Natakusuma%20No.%20137,%20Pontianak&t=&z=15&ie=UTF8&iwloc=&output=embed", directUrl: "https://maps.google.com/?q=Jl.+Pangeran+Natakusuma+No.+137,+Pontianak+Kota", waUrl: "https://wa.me/628115680008?text=Halo%20Dian%20Glow%20Pontianak%2C%20saya%20tertarik%20melakukan%20konsultasi%20perawatan." },
   { name: "Dian Glow Ketapang", embedUrl: "https://maps.google.com/maps?q=Jl.%20D.I.%20Panjaitan,%20Ketapang&t=&z=15&ie=UTF8&iwloc=&output=embed", directUrl: "https://maps.google.com/?q=Jl.+D.I.+Panjaitan,+Ketapang", waUrl: "https://wa.me/6281155008809?text=Halo%20Dian%20Glow%20Ketapang%2C%20saya%20tertarik%20melakukan%20konsultasi%20perawatan." },
@@ -90,6 +98,8 @@ const contactBranchesDatabase = [
   { name: "Singkawang", konsultasi: "0821-5765-2087", cs: "0811-4800-8880", reservasi: "0811-5680-008" },
   { name: "Sintang", konsultasi: "0821-5765-2087", cs: "0811-5684-600", reservasi: "0811-5680-008" }
 ];
+
+const branchNames = ["Cabang Pontianak", "Cabang Ketapang", "Cabang Singkawang", "Cabang Sintang"];
 
 /* ---------------- Render Grids & Filter Treatment Menu ---------------- */
 const treatmentGrid = document.getElementById('treatmentGrid');
@@ -239,7 +249,7 @@ if (jobGrid) {
     </div>`).join('');
 }
 
-/* ---------------- Logika Hubungi Cabang Interaktif Capsule ---------------- */
+/* ---------------- LOGIKA REVISI UTAMA: HUBUNGI CABANG MULTI-TAB KONVERSI VALID ---------------- */
 const contactBranchBtns = document.querySelectorAll('.contact-branch-btn');
 const contactBranchName = document.getElementById('contact-branch-name');
 const numKonsultasi = document.getElementById('num-konsultasi');
@@ -258,10 +268,10 @@ function updateContactSection(index) {
   if(numCs) numCs.textContent = data.cs;
   if(numReservasi) numReservasi.textContent = data.reservasi;
 
-  const msgText = encodeURIComponent(`Halo Dian Glow ${data.name}, saya ingin terhubung untuk bertanya info layanan kecantikan.`);
-  if(linkKonsultasi) linkKonsultasi.href = `https://wa.me/${data.konsultasi.replace(/-/g, '')}?text=${msgText}`;
-  if(linkCs) linkCs.href = `https://wa.me/${data.cs.replace(/-/g, '')}?text=${msgText}`;
-  if(linkReservasi) linkReservasi.href = `https://wa.me/${data.reservasi.replace(/-/g, '')}?text=${msgText}`;
+  // Integrasi getCleanWaUrl untuk menyaring angka 08 menjadi 628 internasional agar nomor berhasil dideteksi WhatsApp
+  if(linkKonsultasi) linkKonsultasi.href = getCleanWaUrl(data.konsultasi, `Halo Dian Glow Clinic ${data.name}, saya ingin melakukan konsultasi medis mengenai perawatan kulit.`);
+  if(linkCs) linkCs.href = getCleanWaUrl(data.cs, `Halo Dian Glow Clinic ${data.name}, saya ingin bertanya seputar informasi produk skincare Dian Glow.`);
+  if(linkReservasi) linkReservasi.href = getCleanWaUrl(data.reservasi, `Halo Dian Glow Clinic ${data.name}, saya ingin memesan jadwal reservasi booking kedatangan treatment.`);
 }
 
 contactBranchBtns.forEach(btn => {
@@ -278,6 +288,7 @@ contactBranchBtns.forEach(btn => {
   });
 });
 
+// Load default data awal
 updateContactSection(0);
 
 /* ---------------- Sistem Kunci Poros Gulir Ganda (Scroll-Lock) ---------------- */
@@ -448,7 +459,6 @@ if (aboutTrack) {
       dot.classList.toggle('active', index === currentSlide);
     });
 
-    // Perbaikan total untuk merender text bubble secara solid dan akurat tanpa bug opacity
     if (aboutBranchBubble) {
       aboutBranchBubble.textContent = branchNames[currentSlide] || `Cabang ${currentSlide + 1}`;
     }
@@ -545,8 +555,13 @@ if (aboutTrack) {
   }
 }
 
-/* ---------------- Peta Lokasi Cabang Dinamis Interaktif & WhatsApp Dinamis ---------------- */
+/* ---------------- INTERAKTIF LIST LOKASI PETA CABANG (DEKLARASI AMAN & TUNGGAL) ---------------- */
 const branchItems = document.querySelectorAll('.branch-item');
+const branchMap = document.getElementById('branch-map');
+const activeBranchText = document.getElementById('active-branch-text');
+const branchMapsBtn = document.getElementById('branch-maps-btn');
+const branchWaBtn = document.getElementById('branch-wa-btn');
+
 if (branchItems.length > 0 && branchMap) {
   branchItems.forEach((item, index) => {
     item.addEventListener('click', () => {

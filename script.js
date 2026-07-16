@@ -17,9 +17,9 @@ const paketProducts = [
   { id: 1, img: "Produk Paket/Foto 2.png", name: "Paket Glowing Premium Perfect Glow", type: "paket", price: "Rp 500.000" },
   { id: 2, img: "Produk Paket/Foto 3.png", name: "Paket Acne Glow", type: "paket", price: "Rp 350.000" },
   { id: 3, img: "Produk Paket/Foto 4.png", name: "Paket Acne Derma", type: "paket", price: "Rp 300.000" },
-  { id: 4, img: "Produk Paket/Foto 5.png", name: "Paket Glowing Whitening Luxury", type: "paket", price: "Rp 300.000" },
+  { id: 4, img: "Produk Paket/Foto 5.png", name: "Paket Whitening Glowing", type: "paket", price: "" },
   { id: 5, img: "Produk Paket/Foto 6.png", name: "Paket Whitening Booster & Anti Aging", type: "paket", price: "Rp 420.000" },
-  { id: 6, img: "Produk Paket/Foto 7.png", name: "Paket Premium Dian Glow", type: "paket", price: "Rp 320.000" },
+  { id: 6, img: "Produk Paket/Foto 7.png", name: "Paket Premium Dian Glow", type: "paket", price: "" },
   { id: 7, img: "Produk Paket/Foto 8.png", name: "Paket Glowing Premium Whitening Luxury", type: "paket", price: "Rp 320.000" },
   { id: 8, img: "Produk Paket/Foto 9.png", name: "Paket Perawatan Acne Prone", type: "paket", price: "Rp 360.000" },
   { id: 9, img: "Produk Paket/Foto 10.png", name: "Paket Perfect Glow Luxury", type: "paket", price: "Rp 450.000" }
@@ -35,7 +35,7 @@ const satuanProducts = [
   { id: 15, img: "Produk Satuan/Foto 6.jpg", name: "Derma Acne Facial Wash", type: "satuan", price: "Rp 90.000" },
   { id: 16, img: "Produk Satuan/Foto 7.jpg", name: "Serum Acne Prone", type: "satuan", price: "Rp 189.000" },
   { id: 17, img: "Produk Satuan/Foto 8.jpg", name: "Premium Day Sunscreen Whitening Luxe", type: "satuan", price: "Rp 160.000" },
-  { id: 18, img: "Produk Satuan/Foto 9.jpg", name: "Premium Whitening Booster & Anti Aging", type: "satuan", price: "Rp 190.000" },
+  { id: 18, img: "Produk Satuan/Foto 9.jpg", name: "Premium Whitening Booster & Anti Aging", type: "satuan", price: "Rp 210.000" },
   { id: 19, img: "Produk Satuan/Foto 10.jpg", name: "Acne Glowing Toner", type: "satuan", price: "Rp 100.000" },
   { id: 20, img: "Produk Satuan/Foto 11.jpg", name: "Acne Glow Day Cream", type: "satuan", price: "Rp 140.000" },
   { id: 21, img: "Produk Satuan/Foto 12.jpg", name: "Premium Calendula Toner", type: "satuan", price: "Rp 110.000" },
@@ -52,12 +52,13 @@ const satuanProducts = [
   { id: 32, img: "Produk Satuan/Foto 23.jpg", name: "Face Wash Glowing", type: "satuan", price: "Rp 90.000" },
   { id: 33, img: "Produk Satuan/Foto 24.jpg", name: "SheetMask Whitening Glow DNA Salmon", type: "satuan", price: "Rp 38.000" },
   { id: 34, img: "Produk Satuan/Foto 25.jpg", name: "Premium Face Wash", type: "satuan", price: "Rp 110.000" },
-  { id: 35, img: "Produk Satuan/Foto 26.jpg", name: "Perfect Glow Cream", type: "satuan", price: "Rp 245.000" },
+  { id: 35, img: "Produk Satuan/Foto 26.jpg", name: "Perfect Glow Cream", type: "satuan", price: "Rp 275.000" },
   { id: 36, img: "Produk Satuan/Foto 27.jpg", name: "Vit C20 Collagen Glow", type: "satuan", price: "Rp 245.000" },
   { id: 37, img: "Produk Satuan/Foto 28.jpg", name: "Derma Acne Face Toner", type: "satuan", price: "Rp 90.000" },
   { id: 38, img: "Produk Satuan/Foto 29.jpg", name: "Advance Eye Night Complex", type: "satuan", price: "Rp 185.000" },
   { id: 39, img: "Produk Satuan/Foto 30.jpg", name: "Clay Mask Charcoal With Niacinamide", type: "satuan", price: "Rp 129.000" },
-  { id: 40, img: "Produk Satuan/Foto 31.jpg", name: "Ultimate Dark Spot Booster Night Cream", type: "satuan", price: "Rp 170.000" }
+  { id: 40, img: "Produk Satuan/Foto 31.jpg", name: "Ultimate Dark Spot Booster Night Cream", type: "satuan", price: "Rp 170.000" },
+  { id: 41, img: "Produk Satuan/Foto 32.jpg", name: "Velux White DNA Salmon Serum", type: "satuan", price: "Rp 199.000" }
 ];
 
 const products = [...paketProducts, ...satuanProducts];

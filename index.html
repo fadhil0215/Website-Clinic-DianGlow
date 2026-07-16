@@ -7,196 +7,18 @@
 <meta name="description" content="Dian Glow Clinic — Specialist atasi flek hitam & jerawat radang. BPOM & Halal, aman untuk ibu hamil dan menyusui.">
 
 <script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class'
+  }
+</script>
+
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300..900;1,300..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --bg-0:#FDF3F7; --bg-1:#FBE4F0; --bg-2:#EFDCF6;
-  --ink:#341726; --ink-soft:#7A5566;
-  --rose:#B31B52; --rose-mid:#E8578B; --rose-soft:#F6A8C4;
-  --gold:#E8A23B; --lav:#C79BE0;
-  --glass:rgba(255,255,255,.36); --glass-strong:rgba(255,255,255,.52);
-  --glass-border:rgba(255,255,255,.95); --glass-shadow:rgba(155,30,80,.20);
-  --glass-highlight:rgba(255,255,255,.65);
-  --line:rgba(179,27,82,.14);
-}
-html.dark{
-  --bg-0:#1B0E17; --bg-1:#231020; --bg-2:#2B1526;
-  --ink:#FBEAF1; --ink-soft:#CFA3B8;
-  --rose:#F0699A; --rose-mid:#E8578B; --rose-soft:#7A3350;
-  --gold:#F0B45C; --lav:#B98FDD;
-  --glass:rgba(40,20,33,.42); --glass-strong:rgba(40,20,33,.62);
-  --glass-border:rgba(255,255,255,.12); --glass-shadow:rgba(0,0,0,.5);
-  --glass-highlight:rgba(255,255,255,.16);
-  --line:rgba(255,255,255,.08);
-}
-*{box-sizing:border-box}
-body{
-  background:
-    radial-gradient(1200px 700px at 15% -10%, var(--bg-2), transparent 60%),
-    radial-gradient(1000px 700px at 100% 10%, var(--bg-1), transparent 55%),
-    var(--bg-0);
-  color:var(--ink);
-  font-family:'Plus Jakarta Sans',sans-serif;
-  transition:background-color .4s ease,color .4s ease;
-  -webkit-font-smoothing:antialiased;
-}
-.font-display{ font-family:'Fraunces',serif; }
-section{ scroll-margin-top:96px; }
-::selection{ background:var(--rose-soft); color:#fff; }
-
-/* ---------- Glass system ---------- */
-.glass{
-  position:relative;
-  background:var(--glass);
-  backdrop-filter:blur(22px) saturate(200%) contrast(1.05);
-  -webkit-backdrop-filter:blur(22px) saturate(200%) contrast(1.05);
-  border:1px solid var(--glass-border);
-  box-shadow:0 8px 32px var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,.4);
-}
-.glass-strong{
-  position:relative;
-  background:var(--glass-strong);
-  backdrop-filter:blur(30px) saturate(200%) contrast(1.06);
-  -webkit-backdrop-filter:blur(30px) saturate(200%) contrast(1.06);
-  border:1px solid var(--glass-border);
-  box-shadow:0 12px 40px var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,.5);
-}
-.glass-strong::after{
-  content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
-  background:linear-gradient(165deg, var(--glass-highlight) 0%, transparent 45%);
-  mix-blend-mode:overlay;
-}
-.sheen{ position:relative; overflow:hidden; isolation:isolate; }
-.sheen::before{
-  content:''; position:absolute; inset:-60% -60%;
-  background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);
-  transform:translateX(-120%); transition:transform .7s ease; z-index:1; pointer-events:none;
-}
-.sheen:hover::before{ transform:translateX(60%); }
-html.dark .sheen::before{ background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.15) 50%,transparent 65%); }
-
-/* ---------- Orbs / liquid blobs ---------- */
-.orb-field{ position:fixed; inset:0; overflow:hidden; z-index:0; pointer-events:none; }
-.orb{ position:absolute; filter:blur(70px); opacity:.55; animation:blobFloat 20s ease-in-out infinite; }
-.orb-a{ width:520px;height:520px; top:-160px; left:-120px; background:radial-gradient(circle at 30% 30%,var(--rose-mid),transparent 70%); }
-.orb-b{ width:460px;height:460px; top:10%; right:-160px; background:radial-gradient(circle at 60% 40%,var(--lav),transparent 70%); animation-delay:-6s; }
-.orb-c{ width:420px;height:420px; bottom:-180px; left:20%; background:radial-gradient(circle at 40% 60%,var(--gold),transparent 70%); animation-delay:-12s; opacity:.4; }
-@keyframes blobFloat{
-  0%{ border-radius:42% 58% 65% 35%/45% 45% 55% 55%; transform:translate(0,0) rotate(0deg); }
-  33%{ border-radius:60% 40% 30% 70%/50% 60% 40% 50%; transform:translate(24px,-30px) rotate(8deg); }
-  66%{ border-radius:35% 65% 55% 45%/60% 35% 65% 40%; transform:translate(-18px,18px) rotate(-6deg); }
-  100%{ border-radius:42% 58% 65% 35%/45% 45% 55% 55%; transform:translate(0,0) rotate(0deg); }
-}
-
-/* ---------- Nav ---------- */
-#nav{ position:fixed; top:14px; left:14px; right:14px; z-index:50; border-radius:9999px; padding:10px 18px; transition:all .35s ease; }
-@property --navAngle{ syntax:'<angle>'; inherits:false; initial-value:0deg; }
-#nav::before{
-  content:''; position:absolute; inset:-1.5px; border-radius:9999px; padding:1.5px;
-  background:conic-gradient(from var(--navAngle,0deg), var(--rose), var(--gold), var(--lav), var(--rose-mid), var(--rose));
-  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor; mask-composite:exclude;
-  opacity:.5; pointer-events:none; z-index:-1;
-  animation:navBorderSpin 12s linear infinite;
-}
-@keyframes navBorderSpin{ to{ --navAngle:360deg; } }
-#nav.scrolled{ top:8px; padding:8px 16px; }
-.nav-link{ position:relative; color:var(--ink); opacity:.8; font-weight:500; }
-.nav-link::after{ content:''; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:linear-gradient(90deg,var(--rose),var(--gold)); transition:width .3s ease; }
-.nav-link:hover{ opacity:1; }
-.nav-link:hover::after{ width:100%; }
-.btn-primary{
-  background:linear-gradient(135deg,var(--rose),var(--rose-mid));
-  color:#fff; font-weight:600; border-radius:9999px; padding:.7rem 1.6rem;
-  box-shadow:0 8px 24px rgba(179,27,82,.35); transition:transform .3s ease,box-shadow .3s ease;
-}
-.btn-primary:hover{ transform:translateY(-2px); box-shadow:0 12px 30px rgba(179,27,82,.45); }
-.btn-ghost{ border:1px solid var(--glass-border); color:var(--ink); border-radius:9999px; padding:.7rem 1.6rem; font-weight:600; transition:all .3s ease; }
-.btn-ghost:hover{ background:var(--glass); transform:translateY(-2px); }
-
-/* ---------- Liquid bubble nav indicator ---------- */
-#navLinksRow{ position:relative; isolation:isolate; padding:2px 6px; }
-.goo-layer{ position:absolute; inset:-16px -6px; z-index:0; pointer-events:none; }
-.goo-dot{ position:absolute; top:50%; border-radius:9999px; background:linear-gradient(135deg,var(--rose-soft),var(--rose-mid)); }
-#navIndicator{ height:36px; width:0; left:0; opacity:0; transform:translateY(-50%); transition:left .5s cubic-bezier(.22,1,.36,1), width .5s cubic-bezier(.22,1,.36,1), opacity .3s ease; }
-#navIndicator.active{ opacity:.9; }
-.nav-bubble{ width:12px; height:12px; opacity:.5; animation:navBubbleFloat 7s ease-in-out infinite; }
-.nb1{ left:6%; animation-delay:0s; }
-.nb2{ left:45%; animation-delay:-2.4s; width:9px; height:9px; }
-.nb3{ left:85%; animation-delay:-4.8s; width:15px; height:15px; }
-@keyframes navBubbleFloat{
-  0%,100%{ transform:translateY(-50%) translateX(0) scale(1); }
-  50%{ transform:translateY(-85%) translateX(8px) scale(1.35); }
-}
-.nav-link{ position:relative; z-index:1; padding:.5rem .2rem; }
-
-/* ---------- Custom liquid cursor ---------- */
-@media (hover:hover) and (pointer:fine){
-  html.custom-cursor, html.custom-cursor *{ cursor:none !important; }
-  .cursor-dot{
-    position:fixed; top:0; left:0; width:7px; height:7px; border-radius:50%;
-    background:var(--rose); pointer-events:none; z-index:9999; transform:translate(-50%,-50%);
-    transition:opacity .2s ease, background-color .3s ease; opacity:0;
-  }
-  .cursor-ring{
-    position:fixed; top:0; left:0; width:36px; height:36px; border-radius:50%;
-    border:1.5px solid var(--rose); background:rgba(232,87,139,.08);
-    backdrop-filter:blur(3px) saturate(160%); -webkit-backdrop-filter:blur(3px) saturate(160%);
-    pointer-events:none; z-index:9998; transform:translate(-50%,-50%);
-    transition:width .3s cubic-bezier(.22,1,.36,1), height .3s cubic-bezier(.22,1,.36,1), background-color .3s ease, border-color .3s ease, opacity .2s ease;
-    opacity:0;
-  }
-  .cursor-ring.show, .cursor-dot.show{ opacity:1; }
-  .cursor-ring.hover{ width:64px; height:64px; background:rgba(232,87,139,.16); border-color:var(--gold); }
-  .cursor-ring.hover ~ .cursor-dot{ opacity:0; }
-}
-
-#hamburger span{ display:block; width:22px; height:2px; background:var(--ink); margin:5px 0; transition:.35s; border-radius:2px; }
-#hamburger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
-#hamburger.open span:nth-child(2){ opacity:0; }
-#hamburger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
-
-#mobile-menu{ position:fixed; inset:0; z-index:45; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.6rem; opacity:0; pointer-events:none; transform:translateY(-12px); transition:all .4s ease; }
-#mobile-menu.open{ opacity:1; pointer-events:auto; transform:translateY(0); }
-#mobile-menu a{ font-family:'Fraunces',serif; font-size:2rem; font-style:italic; }
-
-/* ---------- Text ---------- */
-.grad-text{ background:linear-gradient(120deg,var(--rose),var(--gold)); -webkit-background-clip:text; background-clip:text; color:transparent; }
-.eyebrow{ letter-spacing:.18em; text-transform:uppercase; font-size:.72rem; font-weight:700; color:var(--rose); }
-.underline-flourish{ width:64px; height:3px; border-radius:99px; background:linear-gradient(90deg,var(--rose),var(--gold)); }
-
-/* ---------- Cards ---------- */
-.tile{ position:relative; border-radius:1.75rem; overflow:hidden; cursor:pointer; }
-.tile img,.tile video{ transition:transform .6s ease, filter .4s ease; }
-.tile:hover img,.tile:hover video{ transform:scale(1.06); }
-.tile-expand{ position:absolute; top:10px; right:10px; width:38px; height:38px; border-radius:9999px; display:flex; align-items:center; justify-content:center; opacity:0; transform:scale(.8); transition:all .3s ease; z-index:2; }
-.tile:hover .tile-expand{ opacity:1; transform:scale(1); }
-
-.chip{ display:inline-flex; align-items:center; gap:.4rem; border-radius:9999px; padding:.35rem .85rem; font-size:.72rem; font-weight:700; border:1px solid var(--glass-border); background:var(--glass); }
-
-/* ---------- Modals ---------- */
-.modal-overlay{ position:fixed; inset:0; z-index:200; display:none; align-items:center; justify-content:center; padding:1rem; background:rgba(20,8,15,.72); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
-.modal-overlay.open{ display:flex; }
-.icon-btn{ width:44px; height:44px; border-radius:9999px; display:flex; align-items:center; justify-content:center; color:#fff; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.25); transition:all .25s ease; }
-.icon-btn:hover{ background:rgba(255,255,255,.28); transform:scale(1.06); }
-
-/* ---------- Back to top ---------- */
-#toTop{ position:fixed; bottom:22px; right:22px; z-index:40; width:48px; height:48px; border-radius:9999px; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transform:translateY(10px); transition:all .3s ease; }
-#toTop.show{ opacity:1; pointer-events:auto; transform:translateY(0); }
-
-/* ---------- Utility ---------- */
-.scrollbar-hide::-webkit-scrollbar{ display:none; }
-:focus-visible{ outline:2px solid var(--rose); outline-offset:3px; border-radius:6px; }
-
-@media (prefers-reduced-motion: reduce){
-  .orb{ animation:none !important; }
-  *{ animation-duration:.01ms !important; transition-duration:.01ms !important; }
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body class="antialiased">
 
@@ -218,11 +40,10 @@ html.dark .sheen::before{ background:linear-gradient(115deg,transparent 35%,rgba
   <div class="orb orb-c"></div>
 </div>
 
-<!-- NAV -->
 <nav id="nav" class="glass-strong">
   <div class="max-w-7xl mx-auto flex items-center justify-between">
     <a href="#hero" class="flex items-center gap-2">
-      <img src="Logo-Logo/DianGlowLogo.png" alt="Dian Glow" class="h-9 w-9 rounded-full object-cover" onerror="this.style.display='none'">
+      <img src="Logo-Logo/Foto 2.png" alt="Dian Glow" class="h-9 w-9 rounded-full object-cover">
       <span class="font-display italic font-bold text-xl grad-text">Dian Glow</span>
     </a>
     <div class="hidden lg:flex items-center gap-2" id="navLinksRow">
@@ -260,30 +81,42 @@ html.dark .sheen::before{ background:linear-gradient(115deg,transparent 35%,rgba
   <button id="theme-toggle-mobile" class="btn-ghost !text-base mt-2"><i class="theme-icon fas fa-moon mr-2"></i>Ganti Tema</button>
 </div>
 
-<!-- HERO -->
-<section id="hero" class="relative pt-40 pb-24 lg:pt-56 lg:pb-36 overflow-hidden">
-  <div class="max-w-5xl mx-auto px-5 relative z-10 text-center">
-    <span class="chip mx-auto justify-center" data-aos="fade-up">
-      <i class="fas fa-sparkles text-[var(--gold)]"></i> NO.1 SPECIALIST ATASI FLEK HITAM
-    </span>
-    <h1 class="font-display font-semibold text-4xl md:text-6xl lg:text-7xl mt-7 leading-[1.08]" data-aos="fade-up" data-aos-delay="100">
-      Recharge Your Body<br>
-      <span class="italic grad-text">Refresh Your Mind</span>
-    </h1>
-    <p class="mt-6 text-lg md:text-xl text-[var(--ink-soft)] max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-      Specialist cepat atasi flek hitam & jerawat radang dengan <strong class="text-[var(--ink)]">Formula Premium</strong>, aman & bersertifikat.
-    </p>
-    <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="300">
-      <a href="#services" class="btn-primary sheen text-lg">Hubungi Kami <i class="fas fa-arrow-down ml-2"></i></a>
-      <a href="#treatment_menu" class="btn-ghost glass text-lg">Lihat Treatment</a>
+<section id="hero" class="relative pt-36 pb-20 lg:pt-44 lg:pb-32 overflow-hidden flex items-center min-h-[90vh]">
+  <div class="max-w-7xl mx-auto px-5 relative z-10 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+      <div class="text-left mt-10 lg:mt-0" data-aos="fade-right">
+        <span class="chip mb-6 inline-flex" data-aos="fade-up">
+          <i class="fas fa-sparkles text-[var(--gold)]"></i> NO.1 SPECIALIST ATASI FLEK HITAM
+        </span>
+        <h1 class="font-display font-semibold text-4xl md:text-5xl lg:text-6xl xl:text-[4rem] mt-2 leading-[1.1]" data-aos="fade-up" data-aos-delay="100">
+          Pancarkan Kecantikan Sejatimu<br>
+          <span class="italic grad-text">Secara Alami & Elegan</span>
+        </h1>
+        <p class="mt-6 text-lg md:text-xl text-[var(--ink-soft)] max-w-lg leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+          Klinik kecantikan modern dengan dokter bersertifikasi dan teknologi terkini untuk merawat kulit sehat bercahaya Anda.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row gap-4" data-aos="fade-up" data-aos-delay="300">
+          <a href="#services" class="btn-primary sheen text-lg text-center inline-flex items-center justify-center">
+            Booking Konsultasi Sekarang <i class="fas fa-arrow-right ml-2"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="relative flex justify-center lg:justify-end mt-12 lg:mt-0" data-aos="fade-left" data-aos-delay="200">
+        <div class="relative w-full max-w-[28rem] sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl scale-[1.15] lg:scale-[1.3] xl:scale-[1.4] origin-bottom lg:translate-x-6 xl:translate-x-12 translate-y-4">
+          <div class="absolute inset-0 bg-gradient-to-tr from-[var(--rose-soft)] to-[var(--lav)] rounded-full blur-3xl opacity-20 animate-pulse" style="transform: scale(0.85);"></div>
+          <div class="absolute bottom-[-6px] left-[55%] -translate-x-1/2 w-[60%] h-6 bg-pink-300/20 dark:bg-black/30 blur-[18px] rounded-[100%] z-0"></div>
+          <img src="Logo-Logo/Foto 1.png" alt="Dian Glow Beauty" class="relative z-10 w-full h-auto object-contain">
+        </div>
+      </div>
     </div>
   </div>
+  
   <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-[var(--ink-soft)] animate-bounce" aria-hidden="true">
     <i class="fas fa-chevron-down"></i>
   </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about" class="py-24">
   <div class="max-w-7xl mx-auto px-5">
     <div class="text-center mb-14" data-aos="fade-up">
@@ -293,12 +126,41 @@ html.dark .sheen::before{ background:linear-gradient(115deg,transparent 35%,rgba
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-16">
-      <div data-aos="fade-right" class="glass rounded-[2rem] p-2">
-        <div class="relative rounded-[1.5rem] overflow-hidden aspect-[4/5] md:aspect-video">
-          <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Klinik Dian Glow" class="w-full h-full object-cover">
-          <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent 60%,rgba(179,27,82,.25))"></div>
+      <div data-aos="fade-right" class="glass rounded-[2rem] p-2 relative group flex flex-col items-center">
+        <div class="relative rounded-[1.5rem] overflow-hidden bg-[var(--bg-1)] w-full" id="about-slider-container">
+          <div id="about-slider-track" class="flex h-full w-full cursor-grab active:cursor-grabbing" style="transition: transform 0.5s ease-in-out;">
+            <div class="relative h-full" style="flex: 0 0 100%; min-width: 100%;">
+              <img src="Cabang Gedung/Foto 1.png" alt="Klinik Dian Glow 1" class="w-full h-full object-cover pointer-events-none select-none">
+            </div>
+            <div class="relative h-full" style="flex: 0 0 100%; min-width: 100%;">
+              <img src="Cabang Gedung/Foto 2.jpeg" alt="Klinik Dian Glow 2" class="w-full h-full object-cover pointer-events-none select-none">
+            </div>
+            <div class="relative h-full" style="flex: 0 0 100%; min-width: 100%;">
+              <img src="Cabang Gedung/Foto 3.jpeg" alt="Klinik Dian Glow 3" class="w-full h-full object-cover pointer-events-none select-none">
+            </div>
+            <div class="relative h-full" style="flex: 0 0 100%; min-width: 100%;">
+              <img src="Cabang Gedung/Foto 4.jpeg" alt="Klinik Dian Glow 4" class="w-full h-full object-cover pointer-events-none select-none">
+            </div>
+          </div>
+          <div class="absolute inset-0 pointer-events-none" style="background:linear-gradient(180deg,transparent 60%,rgba(179,27,82,.25))"></div>
+          <button id="btn-prev-about" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md border border-white/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-[var(--rose)] z-10" aria-label="Sebelumnya">
+            <i class="fas fa-chevron-left pointer-events-none"></i>
+          </button>
+          <button id="btn-next-about" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md border border-white/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-[var(--rose)] z-10" aria-label="Berikutnya">
+            <i class="fas fa-chevron-right pointer-events-none"></i>
+          </button>
+          <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+            <button class="about-dot w-2 h-2 rounded-full bg-white/50 transition-all"></button>
+            <button class="about-dot w-2 h-2 rounded-full bg-white/50 transition-all"></button>
+            <button class="about-dot w-2 h-2 rounded-full bg-white/50 transition-all"></button>
+            <button class="about-dot w-2 h-2 rounded-full bg-white/50 transition-all"></button>
+          </div>
+        </div>
+        <div id="about-branch-bubble" class="mt-4 chip !text-xs !py-2 !px-5 !bg-[var(--rose)] text-white font-semibold tracking-wider border-none shadow-lg transition-all duration-300">
+          Cabang Pontianak
         </div>
       </div>
+      
       <div data-aos="fade-left" class="space-y-4 text-[var(--ink-soft)] leading-relaxed">
         <p>Klinik Dian Glow merupakan klinik kecantikan yang menggabungkan perawatan kecantikan kulit yang dilakukan oleh Dokter dan Beauty Therapist secara terpadu untuk seluruh tubuh Anda.</p>
         <p>Semua prosedur perawatan kecantikan di Klinik Dian Glow dilakukan oleh dokter bersertifikat dan berpengalaman di bidang estetika dengan kemampuan dan teknik yang selalu ditingkatkan serta didukung berbagai alat canggih sesuai perkembangan teknologi terbaru.</p>
@@ -331,67 +193,147 @@ html.dark .sheen::before{ background:linear-gradient(115deg,transparent 35%,rgba
       </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch" data-aos="fade-up">
-      <div class="lg:col-span-1 glass rounded-[2rem] p-8 flex flex-col justify-center">
-        <h3 class="font-display font-semibold text-2xl mb-4">Kunjungi Kami</h3>
-        <div class="flex items-start mb-4 gap-3 text-[var(--ink-soft)]">
-          <i class="fas fa-map-marker-alt text-[var(--rose)] text-xl mt-1"></i>
-          <p><strong class="text-[var(--ink)]">Dian Glow Clinic</strong><br>Jl. Pangeran Natakusuma No. 137<br>Pontianak Kota, Kalimantan Barat</p>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch" data-aos="fade-up">
+      <div class="lg:col-span-5 flex flex-col gap-4">
+        <div class="mb-2 px-2">
+          <span class="eyebrow">Denah Klinik</span>
+          <h3 class="font-display font-semibold text-2xl mt-1 text-[var(--ink)]">Peta Lokasi Cabang</h3>
         </div>
-        <div class="flex items-start gap-3 text-[var(--ink-soft)] mb-6">
-          <i class="fas fa-clock text-[var(--rose)] text-lg mt-1"></i>
-          <p>Buka Setiap Hari<br>09.00 - 20.00 WIB</p>
+        
+        <div class="branch-item glass rounded-2xl p-5 cursor-pointer transition-all duration-300 active-branch" data-branch="0">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm text-white bg-[var(--rose)] shadow-md"><i class="fas fa-map-marker-alt"></i></div>
+            <h4 class="font-semibold text-lg text-[var(--ink)]">Dian Glow Pontianak</h4>
+          </div>
+          <p class="text-sm text-[var(--ink-soft)] leading-relaxed mb-3">Jl. Pangeran Natakusuma No. 137, Pontianak Kota, Kalimantan Barat</p>
+          <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-[var(--ink-soft)] font-medium border-t border-[var(--line)] pt-2">
+            <span><i class="fas fa-phone mr-1 text-[var(--rose)]"></i> 0811-5680-008</span>
+            <span><i class="fas fa-clock mr-1 text-[var(--gold)]"></i> 08.00 - 21.00 WIB</span>
+          </div>
         </div>
-        <a href="https://maps.google.com/?q=Jl.+Pangeran+Natakusuma+No.+137,+Pontianak+Kota" target="_blank" rel="noopener" class="btn-primary sheen text-center">Buka di Aplikasi Maps</a>
+
+        <div class="branch-item glass rounded-2xl p-5 cursor-pointer transition-all duration-300 opacity-70 hover:opacity-100" data-branch="1">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm text-white bg-[var(--rose)] shadow-md"><i class="fas fa-map-marker-alt"></i></div>
+            <h4 class="font-semibold text-lg text-[var(--ink)]">Dian Glow Ketapang</h4>
+          </div>
+          <p class="text-sm text-[var(--ink-soft)] leading-relaxed mb-3">Jl. D.I. Panjaitan (Samping CW Coffee), Ketapang, Kalimantan Barat</p>
+          <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-[var(--ink-soft)] font-medium border-t border-[var(--line)] pt-2">
+            <span><i class="fas fa-phone mr-1 text-[var(--rose)]"></i> 0811-5500-8809</span>
+            <span><i class="fas fa-clock mr-1 text-[var(--gold)]"></i> 08.00 - 21.00 WIB</span>
+          </div>
+        </div>
+
+        <div class="branch-item glass rounded-2xl p-5 cursor-pointer transition-all duration-300 opacity-70 hover:opacity-100" data-branch="2">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm text-white bg-[var(--rose)] shadow-md"><i class="fas fa-map-marker-alt"></i></div>
+            <h4 class="font-semibold text-lg text-[var(--ink)]">Dian Glow Singkawang</h4>
+          </div>
+          <p class="text-sm text-[var(--ink-soft)] leading-relaxed mb-3">Jl. Yos Sudarso, Melayu Pasiran, Singkawang, Kalimantan Barat</p>
+          <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-[var(--ink-soft)] font-medium border-t border-[var(--line)] pt-2">
+            <span><i class="fas fa-phone mr-1 text-[var(--rose)]"></i> 0811-4800-8880</span>
+            <span><i class="fas fa-clock mr-1 text-[var(--gold)]"></i> 08.00 - 21.00 WIB</span>
+          </div>
+        </div>
+
+        <div class="branch-item glass rounded-2xl p-5 cursor-pointer transition-all duration-300 opacity-70 hover:opacity-100" data-branch="3">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm text-white bg-[var(--rose)] shadow-md"><i class="fas fa-map-marker-alt"></i></div>
+            <h4 class="font-semibold text-lg text-[var(--ink)]">Dian Glow Sintang</h4>
+          </div>
+          <p class="text-sm text-[var(--ink-soft)] leading-relaxed mb-3">Jl. MT Haryono Km. 4, Komplek Pasar Kapuas Raya Sintang No. 817, Kalimantan Barat</p>
+          <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-[var(--ink-soft)] font-medium border-t border-[var(--line)] pt-2">
+            <span><i class="fas fa-phone mr-1 text-[var(--rose)]"></i> 0811-5684-600</span>
+            <span><i class="fas fa-clock mr-1 text-[var(--gold)]"></i> 08.00 - 21.00 WIB</span>
+          </div>
+        </div>
       </div>
-      <div class="lg:col-span-2 glass rounded-[2rem] overflow-hidden h-[300px] md:h-auto p-2">
-        <iframe class="w-full h-full rounded-[1.5rem]" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.817551065147!2d109.32454597401576!3d-0.03816659995874288!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e1d58f604b07699%3A0x4469ce32df8db93b!2sJl.%20P.Nata%20Kusuma%20No.137%2C%20Sungai%20Bangkong%2C%20Kec.%20Pontianak%20Kota%2C%20Kota%20Pontianak%2C%20Kalimantan%20Barat%2078116!5e0!3m2!1sid!2sid!4v1715610000000!5m2!1sid!2sid"
-          style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+      <div class="lg:col-span-7 glass rounded-[2rem] overflow-hidden min-h-[440px] lg:h-auto p-2 flex flex-col justify-between">
+        <iframe id="branch-map" class="w-full h-full rounded-[1.5rem] min-h-[360px]" 
+          src="https://maps.google.com/maps?q=Jl.%20Pangeran%20Natakusuma%20No.%20137,%20Pontianak&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+          style="border:0; transition: opacity 0.3s ease;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        
+        <div class="p-3 flex flex-col sm:flex-row justify-between items-center bg-black/5 dark:bg-white/5 rounded-xl mt-2 gap-3">
+          <span class="text-xs font-medium text-[var(--ink-soft)]">
+            <i class="fas fa-circle-info text-[var(--rose)] mr-1"></i> Menampilkan: <span id="active-branch-text" class="font-bold text-[var(--ink)]">Dian Glow Pontianak</span>
+          </span>
+          <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+            <a id="branch-wa-btn" href="https://wa.me/628115680008?text=Halo%20Dian%20Glow%20Pontianak%2C%20saya%20tertarik%20melakukan%20konsultasi%20perawatan." 
+              target="_blank" rel="noopener" class="inline-flex items-center justify-center bg-[#25D366] hover:bg-[#1EBE56] text-white px-4 py-1.5 rounded-xl text-xs font-semibold transition-colors shadow-sm whitespace-nowrap">
+              <i class="fab fa-whatsapp text-sm mr-1.5"></i> Hubungi Cabang
+            </a>
+            <a id="branch-maps-btn" href="https://maps.google.com/?q=Jl.+Pangeran+Natakusuma+No.+137,+Pontianak+Kota" 
+              target="_blank" rel="noopener" class="btn-primary sheen !py-1.5 !px-4 text-xs font-sans not-italic tracking-normal shadow-sm whitespace-nowrap">
+              Buka Peta <i class="fas fa-external-link-alt ml-1 text-[10px]"></i>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TREATMENT MENU -->
 <section id="treatment_menu" class="py-24">
   <div class="max-w-7xl mx-auto px-5">
-    <div class="text-center mb-14" data-aos="fade-up">
+    <div class="text-center mb-10" data-aos="fade-up">
       <span class="eyebrow">Pilihan Perawatan</span>
       <h2 class="font-display font-semibold text-3xl md:text-5xl mt-3">Treatment Menu</h2>
       <div class="underline-flourish mx-auto mt-5"></div>
       <p class="mt-4 text-[var(--ink-soft)]">Ragam pilihan perawatan terbaik untuk mengatasi berbagai masalah kulit Anda. Ketuk gambar untuk memperbesar.</p>
     </div>
-    <div id="treatmentGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"></div>
+
+    <div class="flex flex-wrap justify-center gap-2.5 md:gap-3 mb-10" data-aos="fade-up">
+      <button class="treatment-filter-btn chip active-filter !py-2.5 !px-5 !text-xs cursor-pointer transition-all duration-300" data-filter="face">FACE TREATMENT</button>
+      <button class="treatment-filter-btn chip !py-2.5 !px-5 !text-xs cursor-pointer transition-all duration-300" data-filter="peeling">PEELING TREATMENT</button>
+      <button class="treatment-filter-btn chip !py-2.5 !px-5 !text-xs cursor-pointer transition-all duration-300" data-filter="laser">LASER TREATMENT</button>
+    </div>
+
+    <div id="treatmentGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 min-h-[300px]"></div>
   </div>
 </section>
 
-<!-- KATALOG PRODUK -->
 <section id="katalog" class="py-24">
   <div class="max-w-7xl mx-auto px-5">
-    <div class="text-center mb-14" data-aos="fade-up">
+    <div class="text-center mb-10" data-aos="fade-up">
       <span class="eyebrow">Dian Glow Skincare</span>
       <h2 class="font-display font-semibold text-3xl md:text-5xl mt-3">Katalog Produk Premium</h2>
       <div class="underline-flourish mx-auto mt-5"></div>
-      <p class="mt-4 text-[var(--ink-soft)]">Rangkaian perawatan eksklusif (44 Produk) untuk kecantikan maksimal Anda.</p>
     </div>
-    <div id="productGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-7"></div>
+
+    <div class="flex justify-center mb-12" data-aos="fade-up">
+      <div class="glass p-1.5 rounded-full flex items-center gap-1">
+        <button class="product-filter-btn px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 active-product-filter" data-filter="paket">Paket Perawatan</button>
+        <button class="product-filter-btn px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 text-[var(--ink-soft)]" data-filter="satuan">Produk Satuan</button>
+      </div>
+    </div>
+
+    <div class="flex justify-between items-end mb-8 border-b border-[var(--line)] pb-4" data-aos="fade-up">
+      <div>
+        <h3 id="product-section-title" class="font-display font-semibold text-2xl text-[var(--ink)]">Paket Perawatan Premium</h3>
+        <p id="product-section-desc" class="text-sm text-[var(--ink-soft)] mt-1">Perawatan lengkap dengan hasil maksimal untuk kulit sehat bercahaya.</p>
+      </div>
+      <button id="viewAllProductsBtn" class="text-xs font-bold text-[var(--rose)] hover:underline flex items-center gap-1 whitespace-nowrap mb-1 bg-transparent border-none cursor-pointer outline-none">
+        Lihat Semua <i class="fas fa-chevron-right text-[9px]"></i>
+      </button>
+    </div>
+
+    <div id="productGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-7 min-h-[350px]"></div>
   </div>
 </section>
 
-<!-- TESTIMONI -->
 <section id="testimoni" class="py-24">
   <div class="max-w-7xl mx-auto px-5">
     <div class="text-center mb-14" data-aos="fade-up">
       <span class="eyebrow">Bukti Nyata</span>
       <h2 class="font-display font-semibold text-3xl md:text-5xl mt-3">Testimoni Pasien Kami</h2>
       <div class="underline-flourish mx-auto mt-5"></div>
-      <p class="mt-4 text-[var(--ink-soft)]">Hasil nyata perawatan flek hitam & jerawat radang di Klinik Dian Glow.</p>
+      <p class="mt-4 text-[var(--ink-soft)]">Hasil nyata perawatan jerawat ringan/radang, kulit kusam , dan flek hitam.</p>
     </div>
-    <div id="videoGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+    <div id="photoTestimoniGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-5"></div>
   </div>
 </section>
 
-<!-- KARIR -->
 <section id="karir" class="py-24">
   <div class="max-w-7xl mx-auto px-5">
     <div class="text-center mb-14" data-aos="fade-up">
@@ -402,97 +344,123 @@ html.dark .sheen::before{ background:linear-gradient(115deg,transparent 35%,rgba
     </div>
     <div id="jobGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
     <div class="text-center mt-12" data-aos="fade-up">
-      <a href="mailto:hrd.diansglow@gmail.com" class="btn-primary sheen text-lg"><i class="fas fa-envelope mr-3"></i>Kirim CV & Lamaran Sekarang</a>
+  <a href="https://wa.me/6281350740338?text=Halo%20Dian%20Glow%20Clinic%2C%20saya%20tertarik%20untuk%20mengirimkan%20lamaran%20kerja." target="_blank" rel="noopener" class="btn-primary sheen text-lg">
+    <i class="fab fa-whatsapp mr-3"></i>Kirim CV & Lamaran Sekarang
+  </a>
+</div>
+  </div>
+</section>
+
+<section id="services" class="py-24 relative overflow-hidden">
+  <div class="max-w-4xl mx-auto px-5 relative z-10">
+    <div class="text-center mb-10" data-aos="fade-up">
+      <h2 class="font-display font-semibold text-4xl md:text-5xl text-[var(--ink)]">Hubungi Cabang Kami</h2>
+      <div class="underline-flourish mx-auto mt-4 mb-4"></div>
+      <p class="text-sm text-[var(--ink-soft)] font-medium">Pilih cabang untuk melihat informasi & nomor yang dapat dihubungi</p>
+    </div>
+
+    <div class="flex justify-center mb-8" data-aos="fade-up">
+      <div class="glass p-1.5 rounded-full flex flex-wrap justify-center items-center gap-1 shadow-sm w-full sm:w-auto">
+        <button class="contact-branch-btn px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 active-contact-branch" data-branch-idx="0">Pontianak</button>
+        <button class="contact-branch-btn px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 text-[var(--ink-soft)]" data-branch-idx="1">Ketapang</button>
+        <button class="contact-branch-btn px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 text-[var(--ink-soft)]" data-branch-idx="2">Singkawang</button>
+        <button class="contact-branch-btn px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 text-[var(--ink-soft)]" data-branch-idx="3">Sintang</button>
+      </div>
+    </div>
+
+    <div id="contactContentCard" class="glass-strong rounded-[2.5rem] p-6 sm:p-10 shadow-2xl border-[var(--glass-border)] transition-all duration-300" data-aos="zoom-in">
+      <div class="flex items-center gap-4 mb-8">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-tr from-[var(--rose-mid)] to-[var(--rose-soft)] flex items-center justify-center text-white text-xl sm:text-2xl shadow-md animate-pulse">
+          <i class="fas fa-location-dot"></i>
+        </div>
+        <div>
+          <span class="text-xs sm:text-sm font-bold tracking-wider text-[var(--rose)] uppercase block">Dian Glow Clinic</span>
+          <h3 id="contact-branch-name" class="font-display font-bold text-3xl sm:text-4xl text-[var(--ink)] mt-0.5">Pontianak</h3>
+        </div>
+      </div>
+      
+      <div class="underline-flourish w-24 mb-8"></div>
+
+      <div class="space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-white/20 dark:bg-black/10 rounded-2xl gap-3 hover:bg-white/40 transition-colors">
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 rounded-xl bg-[var(--rose-soft)] text-[var(--rose)] flex items-center justify-center text-lg"><i class="fas fa-user-doctor"></i></div>
+            <div>
+              <p class="text-xs font-bold text-[var(--ink-soft)] uppercase tracking-wider">Konsultasi Medis</p>
+              <p id="num-konsultasi" class="text-base sm:text-lg font-bold text-[var(--ink)]">0821-5765-2087</p>
+            </div>
+          </div>
+          <a id="link-konsultasi" href="#" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 bg-white text-[var(--rose)] hover:bg-[var(--rose)] hover:text-white px-5 py-2.5 rounded-xl text-xs font-bold shadow-md transition-all sm:w-auto w-full border border-[var(--rose-soft)]"><i class="fab fa-whatsapp text-sm"></i> Chat WhatsApp</a>
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-white/20 dark:bg-black/10 rounded-2xl gap-3 hover:bg-white/40 transition-colors">
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 rounded-xl bg-[var(--rose-soft)] text-[var(--rose)] flex items-center justify-center text-lg"><i class="fas fa-headset"></i></div>
+            <div>
+              <p class="text-xs font-bold text-[var(--ink-soft)] uppercase tracking-wider">Customer Service</p>
+              <p id="num-cs" class="text-base sm:text-lg font-bold text-[var(--ink)]">0811-5680-008</p>
+            </div>
+          </div>
+          <a id="link-cs" href="#" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 bg-white text-[var(--rose)] hover:bg-[var(--rose)] hover:text-white px-5 py-2.5 rounded-xl text-xs font-bold shadow-md transition-all sm:w-auto w-full border border-[var(--rose-soft)]"><i class="fab fa-whatsapp text-sm"></i> Chat WhatsApp</a>
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-white/20 dark:bg-black/10 rounded-2xl gap-3 hover:bg-white/40 transition-colors">
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 rounded-xl bg-[var(--rose-soft)] text-[var(--rose)] flex items-center justify-center text-lg"><i class="fas fa-calendar-check"></i></div>
+            <div>
+              <p class="text-xs font-bold text-[var(--ink-soft)] uppercase tracking-wider">Reservasi Treatment</p>
+              <p id="num-reservasi" class="text-base sm:text-lg font-bold text-[var(--ink)]">0811-5680-008</p>
+            </div>
+          </div>
+          <a id="link-reservasi" href="#" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 bg-white text-[var(--rose)] hover:bg-[var(--rose)] hover:text-white px-5 py-2.5 rounded-xl text-xs font-bold shadow-md transition-all sm:w-auto w-full border border-[var(--rose-soft)]"><i class="fab fa-whatsapp text-sm"></i> Chat WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="mt-8 pt-4 border-t border-[var(--line)] flex items-center gap-3 text-xs sm:text-sm font-medium text-[var(--ink-soft)] justify-center bg-black/5 dark:bg-white/5 p-3 rounded-2xl">
+        <i class="fas fa-clock text-[var(--rose)] text-base"></i>
+        <span><strong>Jam Operasional:</strong> 08.00 - 20.00 WIB (Setiap Hari)</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- SERVICES / CONTACT -->
-<section id="services" class="py-24">
-  <div class="max-w-7xl mx-auto px-5">
-    <div class="text-center mb-12" data-aos="fade-up">
-      <span class="eyebrow">Hubungi Kami</span>
-      <h2 class="font-display font-semibold text-3xl md:text-5xl mt-3">Layanan & Kontak</h2>
-      <div class="underline-flourish mx-auto mt-5"></div>
-      <p class="mt-4 text-[var(--ink-soft)] max-w-2xl mx-auto">Untuk mendapatkan perawatan dan hasil yang maksimal, silakan hubungi tim kami sesuai kebutuhan Anda.</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="glass rounded-[2rem] p-8 text-center hover:-translate-y-2 transition-transform duration-300" data-aos="fade-up" data-aos-delay="100">
-        <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background:var(--rose-soft)"><i class="fas fa-user-md text-2xl" style="color:var(--rose)"></i></div>
-        <h3 class="font-display font-semibold text-xl mb-2">Konsultasi</h3>
-        <p class="text-[var(--ink-soft)] text-sm mb-6">Diskusikan masalah kulit Anda langsung bersama ahlinya.</p>
-        <a href="https://wa.me/6282157652087" target="_blank" rel="noopener" class="inline-flex items-center justify-center w-full bg-[#25D366] hover:bg-[#1EBE56] text-white px-6 py-3 rounded-xl font-semibold transition-colors shadow-lg"><i class="fab fa-whatsapp text-xl mr-2"></i> 0821-5765-2087</a>
-      </div>
-      <div class="glass rounded-[2rem] p-8 text-center hover:-translate-y-2 transition-transform duration-300" data-aos="fade-up" data-aos-delay="200">
-        <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background:var(--rose-soft)"><i class="fas fa-headset text-2xl" style="color:var(--rose)"></i></div>
-        <h3 class="font-display font-semibold text-xl mb-2">Customer Service</h3>
-        <p class="text-[var(--ink-soft)] text-sm mb-6">Informasi lengkap terkait produk, promo, dan pengiriman.</p>
-        <a href="https://wa.me/6281350740338" target="_blank" rel="noopener" class="inline-flex items-center justify-center w-full bg-[#25D366] hover:bg-[#1EBE56] text-white px-6 py-3 rounded-xl font-semibold transition-colors shadow-lg"><i class="fab fa-whatsapp text-xl mr-2"></i> 0813-5074-0338</a>
-      </div>
-      <div class="glass rounded-[2rem] p-8 text-center hover:-translate-y-2 transition-transform duration-300" data-aos="fade-up" data-aos-delay="300">
-        <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background:var(--rose-soft)"><i class="fas fa-calendar-check text-2xl" style="color:var(--rose)"></i></div>
-        <h3 class="font-display font-semibold text-xl mb-2">Reservasi</h3>
-        <p class="text-[var(--ink-soft)] text-sm mb-6">Booking jadwal kedatangan dan treatment di klinik kami.</p>
-        <a href="https://wa.me/628115688008" target="_blank" rel="noopener" class="inline-flex items-center justify-center w-full bg-[#25D366] hover:bg-[#1EBE56] text-white px-6 py-3 rounded-xl font-semibold transition-colors shadow-lg"><i class="fab fa-whatsapp text-xl mr-2"></i> 0811-5688-008</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TRUST BADGES -->
-<section class="py-12">
-  <div class="max-w-7xl mx-auto px-5">
-    <div class="flex flex-wrap justify-center items-center gap-4 md:gap-8">
-      <div class="chip !py-3 !px-6" data-aos="zoom-in" data-aos-delay="100">
-        <img src="Logo-Logo/logo-bpom-removebg-preview.png" alt="BPOM" class="w-6 h-6 object-contain" onerror="this.style.display='none'">
-        <span>BPOM</span>
-      </div>
-      <div class="chip !py-3 !px-6" data-aos="zoom-in" data-aos-delay="200">
-        <img src="Logo-Logo/logo-halal-removebg-preview.png" alt="Halal" class="w-6 h-6 object-contain" onerror="this.style.display='none'">
-        <span>HALAL BERSERTIFIKAT</span>
-      </div>
-      <div class="chip !py-3 !px-6" data-aos="zoom-in" data-aos-delay="300"><i class="fas fa-person-pregnant" style="color:var(--rose)"></i><span>AMAN BUMIL & BUSUI</span></div>
-      <div class="chip !py-3 !px-6" data-aos="zoom-in" data-aos-delay="400"><i class="fas fa-shield-heart" style="color:var(--rose)"></i><span>AMAN & TERUJI</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
 <footer class="pt-16 pb-8 mt-8">
   <div class="max-w-7xl mx-auto px-5">
     <div class="glass-strong rounded-[2rem] p-10 grid grid-cols-1 md:grid-cols-3 gap-12 mb-8" data-aos="fade-up">
       <div>
         <div class="flex items-center mb-4">
-          <img src="Logo-Logo/DianGlowLogo.png" alt="Dian Glow" class="h-11 w-11 rounded-full object-cover mr-3" onerror="this.style.display='none'">
+          <img src="Logo-Logo/Foto 1.png" alt="Dian Glow" class="h-11 w-11 rounded-full object-cover mr-3">
           <span class="font-display italic font-bold text-2xl grad-text">Dian Glow</span>
         </div>
         <p class="text-[var(--ink-soft)] max-w-sm">Recharge Your Body, Refresh Your Mind. Klinik dan skincare bersertifikat, higienis, dan terpercaya.</p>
         <div class="flex space-x-3 mt-6">
-          <a href="https://instagram.com/dianslow.clinic" target="_blank" rel="noopener" class="icon-btn !text-[var(--ink)] !bg-transparent !border-[var(--glass-border)]"><i class="fab fa-instagram"></i></a>
+          <a href="https://instagram.com/dianglow_official" target="_blank" rel="noopener" class="icon-btn !text-[var(--ink)] !bg-transparent !border-[var(--glass-border)]"><i class="fab fa-instagram"></i></a>
         </div>
       </div>
       <div>
         <h4 class="font-display font-semibold mb-4 text-lg">Social Media Kami</h4>
         <ul class="text-[var(--ink-soft)] space-y-2 font-medium">
-          <li><a href="https://instagram.com/dianslow.clinic" target="_blank" rel="noopener" class="hover:text-[var(--rose)] transition-colors"><i class="fab fa-instagram mr-2" style="color:var(--rose)"></i>dianslow.clinic</a></li>
-          <li><a href="https://instagram.com/dianslow_official" target="_blank" rel="noopener" class="hover:text-[var(--rose)] transition-colors"><i class="fab fa-instagram mr-2" style="color:var(--rose)"></i>dianslow_official</a></li>
+          <li><a href="https://instagram.com/dianglow.clinic" target="_blank" rel="noopener" class="hover:text-[var(--rose)] transition-colors"><i class="fab fa-instagram mr-2" style="color:var(--rose)"></i>dianglow.clinic</a></li>
+          <li><a href="https://instagram.com/dianglow_official" target="_blank" rel="noopener" class="hover:text-[var(--rose)] transition-colors"><i class="fab fa-instagram mr-2" style="color:var(--rose)"></i>dianglow_official</a></li>
+          <li><a href="https://instagram.com/dianglowclinic.ketapang" target="_blank" rel="noopener" class="hover:text-[var(--rose)] transition-colors"><i class="fab fa-instagram mr-2" style="color:var(--rose)"></i>dianglowclinic.ketapang</a></li>
+          <li><a href="https://instagram.com/dianglowclinic.singkawang" target="_blank" rel="noopener" class="hover:text-[var(--rose)] transition-colors"><i class="fab fa-instagram mr-2" style="color:var(--rose)"></i>dianglowclinic.singkawang</a></li>
+          <li><a href="https://instagram.com/dianglowclinic.sintang" target="_blank" rel="noopener" class="hover:text-[var(--rose)] transition-colors"><i class="fab fa-instagram mr-2" style="color:var(--rose)"></i>dianglowclinic.sintang</a></li>
         </ul>
       </div>
       <div>
-        <h4 class="font-display font-semibold mb-4 text-lg">Lokasi Kami</h4>
+        <h4 class="font-display font-semibold mb-4 text-lg">Lokasi Utama</h4>
         <p class="text-[var(--ink-soft)] mb-4">Jl. Pangeran Natakusuma No. 137<br>Pontianak Kota</p>
         <a href="https://maps.google.com/?q=Jl.+Pangeran+Natakusuma+No.+137,+Pontianak+Kota" target="_blank" rel="noopener" class="font-medium inline-flex items-center" style="color:var(--rose)">Buka di Google Maps <i class="fas fa-external-link-alt ml-2 text-xs"></i></a>
       </div>
     </div>
     <div class="text-center pt-4">
-      <p class="text-sm text-[var(--ink-soft)]">&copy; 2026 Clinic Dian Glow. All rights reserved.</p>
+      <p class="text-sm text-[var(--ink-soft)]">© 2026 Clinic Dian Glow. All rights reserved.</p>
     </div>
   </div>
 </footer>
 
 <button id="toTop" class="glass-strong" aria-label="Kembali ke atas"><i class="fas fa-arrow-up" style="color:var(--rose)"></i></button>
 
-<!-- LIGHTBOX -->
 <div id="lightbox" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Pratinjau gambar">
   <button id="lbClose" class="icon-btn absolute top-5 right-5" aria-label="Tutup"><i class="fas fa-xmark"></i></button>
   <button id="lbPrev" class="icon-btn absolute left-3 md:left-8 top-1/2 -translate-y-1/2" aria-label="Sebelumnya"><i class="fas fa-chevron-left"></i></button>
@@ -503,7 +471,6 @@ html.dark .sheen::before{ background:linear-gradient(115deg,transparent 35%,rgba
   </div>
 </div>
 
-<!-- PRODUCT MODAL -->
 <div id="productModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Detail produk">
   <div class="glass-strong rounded-[2rem] max-w-3xl w-full grid md:grid-cols-2 overflow-hidden relative max-h-[88vh]">
     <button id="pmClose" class="icon-btn absolute top-4 right-4 z-10 !text-[var(--ink)] !bg-black/20" aria-label="Tutup"><i class="fas fa-xmark"></i></button>
@@ -519,187 +486,13 @@ html.dark .sheen::before{ background:linear-gradient(115deg,transparent 35%,rgba
         <span class="chip"><i class="fas fa-check-circle" style="color:var(--rose)"></i>Halal</span>
         <span class="chip"><i class="fas fa-check-circle" style="color:var(--rose)"></i>Aman Bumil & Busui</span>
       </div>
-      <p class="text-[var(--ink-soft)] text-sm mb-6 leading-relaxed">Diformulasikan khusus oleh tim Dian Glow untuk hasil kulit glowing yang aman dan bertahap. Hubungi tim kami untuk info kandungan, cara pakai, dan harga terbaru.</p>
+      <p class="text-[var(--ink-soft)] text-sm mb-6 leading-relaxed">Diformulasikan khusus oleh tim Dian Glow untuk hasil kulit glowing yang aman and bertahap. Hubungi tim kami untuk info kandungan, cara pakai, dan harga terbaru.</p>
       <a id="pmWa" href="#" target="_blank" rel="noopener" class="inline-flex items-center justify-center w-full bg-[#25D366] hover:bg-[#1EBE56] text-white px-6 py-3 rounded-xl font-semibold transition-colors shadow-lg"><i class="fab fa-whatsapp text-xl mr-2"></i>Tanya Produk Ini</a>
     </div>
   </div>
 </div>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-/* ---------------- Data ---------------- */
-const productNames = [
-  "Acne Glowing Facial Wash","Paket Glowing Premium Whitening Luxury","Hydraluxe Crystal Lip Serum",
-  "Paket Glowing Whitening Darkspot","Glowing Spray","Milk Cleanser Acne","Paket Acne Derma",
-  "Paket Glowing Whitening Perfect Glow","Serum Acne Luxe White Glow Premium"
-];
-const treatments = Array.from({length:32},(_,i)=>({img:`Treatment/Foto ${i+1}.jpeg`, alt:`Treatment Menu ${i+1}`}));
-const products = Array.from({length:44},(_,i)=>({img:`Produk/Foto ${i+1}.png`, name: productNames[i] || `Nama Produk ${i+1}`}));
-const videos = Array.from({length:11},(_,i)=>({src:`Testimoni/Video ${i+1}.mp4`, label:`Testimoni ${i+1}`}));
-const jobs = [
-  {img:"Lowongan/Foto 1.png", alt:"Lowongan Pekerjaan 1"},
-  {img:"Lowongan/Foto 2.jpeg", alt:"Lowongan Pekerjaan 2"},
-  {img:"Lowongan/Foto 3.jpeg", alt:"Lowongan Pekerjaan 3"}
-];
-
-/* ---------------- Render grids ---------------- */
-const treatmentGrid = document.getElementById('treatmentGrid');
-treatmentGrid.innerHTML = treatments.map((t,i)=>`
-  <div class="tile glass aspect-square" data-aos="fade-up" data-aos-delay="${(i%6)*80}" onclick="openLightbox(TREATMENT_IMGS, ${i})">
-    <img src="${t.img}" alt="${t.alt}" loading="lazy" class="w-full h-full object-cover">
-    <span class="tile-expand glass !bg-black/30 !border-white/30"><i class="fas fa-expand text-white text-sm"></i></span>
-  </div>`).join('');
-const TREATMENT_IMGS = treatments.map(t=>({src:t.img, alt:t.alt}));
-
-const productGrid = document.getElementById('productGrid');
-productGrid.innerHTML = products.map((p,i)=>`
-  <div class="group" data-aos="fade-up" data-aos-delay="${(i%8)*60}">
-    <div class="tile glass aspect-square" onclick="openProduct(${i})">
-      <img src="${p.img}" alt="${p.name}" loading="lazy" class="w-full h-full object-cover">
-      <span class="tile-expand glass !bg-black/30 !border-white/30"><i class="fas fa-expand text-white text-sm"></i></span>
-    </div>
-    <div class="mt-3 text-center px-1">
-      <h3 class="text-sm font-semibold line-clamp-2 mb-2" title="${p.name}">${p.name}</h3>
-      <button onclick="openProduct(${i})" class="chip mx-auto hover:!bg-[var(--rose-soft)] transition-colors">Lihat Detail <i class="fas fa-arrow-right text-[10px]"></i></button>
-    </div>
-  </div>`).join('');
-
-const videoGrid = document.getElementById('videoGrid');
-videoGrid.innerHTML = videos.map((v,i)=>`
-  <div class="tile glass" data-aos="zoom-in" data-aos-delay="${(i%4)*100}">
-    <video class="w-full h-64 md:h-[380px] object-cover" controls playsinline preload="metadata">
-      <source src="${v.src}" type="video/mp4">
-    </video>
-  </div>`).join('');
-
-const jobGrid = document.getElementById('jobGrid');
-jobGrid.innerHTML = jobs.map((j,i)=>`
-  <div class="tile glass" data-aos="fade-up" data-aos-delay="${i*100}" onclick="openLightbox(JOB_IMGS, ${i})">
-    <img src="${j.img}" alt="${j.alt}" loading="lazy" class="w-full h-auto object-cover">
-    <span class="tile-expand glass !bg-black/30 !border-white/30"><i class="fas fa-expand text-white text-sm"></i></span>
-  </div>`).join('');
-const JOB_IMGS = jobs.map(j=>({src:j.img, alt:j.alt}));
-
-/* ---------------- Lightbox ---------------- */
-let lbGallery = [], lbIndex = 0;
-const lightbox = document.getElementById('lightbox');
-const lbImg = document.getElementById('lbImg');
-const lbCounter = document.getElementById('lbCounter');
-
-function openLightbox(gallery, index){
-  lbGallery = gallery; lbIndex = index;
-  updateLightbox();
-  lightbox.classList.add('open');
-  document.body.classList.add('overflow-hidden');
-}
-function updateLightbox(){
-  const item = lbGallery[lbIndex];
-  lbImg.src = item.src; lbImg.alt = item.alt || '';
-  lbCounter.textContent = lbGallery.length > 1 ? `${lbIndex+1} / ${lbGallery.length}` : '';
-  document.getElementById('lbPrev').style.display = lbGallery.length > 1 ? 'flex' : 'none';
-  document.getElementById('lbNext').style.display = lbGallery.length > 1 ? 'flex' : 'none';
-}
-function closeLightbox(){ lightbox.classList.remove('open'); document.body.classList.remove('overflow-hidden'); }
-document.getElementById('lbClose').onclick = closeLightbox;
-document.getElementById('lbPrev').onclick = ()=>{ lbIndex = (lbIndex - 1 + lbGallery.length) % lbGallery.length; updateLightbox(); };
-document.getElementById('lbNext').onclick = ()=>{ lbIndex = (lbIndex + 1) % lbGallery.length; updateLightbox(); };
-lightbox.addEventListener('click', e=>{ if(e.target === lightbox) closeLightbox(); });
-document.addEventListener('keydown', e=>{
-  if(!lightbox.classList.contains('open')) return;
-  if(e.key === 'Escape') closeLightbox();
-  if(e.key === 'ArrowLeft') document.getElementById('lbPrev').click();
-  if(e.key === 'ArrowRight') document.getElementById('lbNext').click();
-});
-
-/* ---------------- Product modal ---------------- */
-const productModal = document.getElementById('productModal');
-function openProduct(index){
-  const p = products[index];
-  document.getElementById('pmImg').src = p.img;
-  document.getElementById('pmImg').alt = p.name;
-  document.getElementById('pmName').textContent = p.name;
-  document.getElementById('pmWa').href = `https://wa.me/6281350740338?text=${encodeURIComponent('Halo Dian Glow, saya ingin tanya tentang produk "'+p.name+'"')}`;
-  document.getElementById('pmImgWrap').onclick = ()=> openLightbox([{src:p.img, alt:p.name}], 0);
-  productModal.classList.add('open');
-  document.body.classList.add('overflow-hidden');
-}
-function closeProduct(){ productModal.classList.remove('open'); document.body.classList.remove('overflow-hidden'); }
-document.getElementById('pmClose').onclick = closeProduct;
-productModal.addEventListener('click', e=>{ if(e.target === productModal) closeProduct(); });
-document.addEventListener('keydown', e=>{ if(e.key === 'Escape') closeProduct(); });
-
-/* ---------------- Nav / mobile menu / theme / scroll ---------------- */
-const nav = document.getElementById('nav');
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobile-menu');
-const toTop = document.getElementById('toTop');
-
-window.addEventListener('scroll', ()=>{
-  nav.classList.toggle('scrolled', window.scrollY > 20);
-  toTop.classList.toggle('show', window.scrollY > 500);
-});
-hamburger.onclick = ()=>{
-  hamburger.classList.toggle('open');
-  mobileMenu.classList.toggle('open');
-};
-mobileMenu.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=>{
-  hamburger.classList.remove('open'); mobileMenu.classList.remove('open');
-}));
-toTop.onclick = ()=> window.scrollTo({top:0, behavior:'smooth'});
-
-function setTheme(dark){
-  document.documentElement.classList.toggle('dark', dark);
-  document.querySelectorAll('.theme-icon').forEach(i=> i.className = dark ? 'theme-icon fas fa-sun' : 'theme-icon fas fa-moon');
-}
-let isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-setTheme(isDark);
-document.getElementById('theme-toggle').onclick = ()=>{ isDark = !isDark; setTheme(isDark); };
-document.getElementById('theme-toggle-mobile').onclick = ()=>{ isDark = !isDark; setTheme(isDark); };
-
-/* ---------------- Liquid bubble nav indicator ---------------- */
-const navLinksRow = document.getElementById('navLinksRow');
-const navIndicator = document.getElementById('navIndicator');
-if(navLinksRow && navIndicator){
-  navLinksRow.querySelectorAll('[data-nav-link]').forEach(link=>{
-    link.addEventListener('mouseenter', ()=>{
-      const rowRect = navLinksRow.getBoundingClientRect();
-      const linkRect = link.getBoundingClientRect();
-      navIndicator.style.left = (linkRect.left - rowRect.left - 12) + 'px';
-      navIndicator.style.width = (linkRect.width + 24) + 'px';
-      navIndicator.classList.add('active');
-    });
-    link.addEventListener('focus', ()=> link.dispatchEvent(new Event('mouseenter')));
-  });
-  navLinksRow.addEventListener('mouseleave', ()=> navIndicator.classList.remove('active'));
-}
-
-/* ---------------- Custom liquid cursor ---------------- */
-if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
-  document.documentElement.classList.add('custom-cursor');
-  const cDot = document.getElementById('cursorDot');
-  const cRing = document.getElementById('cursorRing');
-  let mx=0, my=0, rx=0, ry=0, primed=false;
-  window.addEventListener('mousemove', e=>{
-    mx = e.clientX; my = e.clientY;
-    cDot.style.left = mx+'px'; cDot.style.top = my+'px';
-    if(!primed){ primed = true; cDot.classList.add('show'); cRing.classList.add('show'); }
-  });
-  (function ringLoop(){
-    rx += (mx-rx)*0.18; ry += (my-ry)*0.18;
-    cRing.style.left = rx+'px'; cRing.style.top = ry+'px';
-    requestAnimationFrame(ringLoop);
-  })();
-  document.addEventListener('mouseover', e=>{
-    if(e.target.closest && e.target.closest('a,button,.tile,.chip,[onclick],input,textarea,select')) cRing.classList.add('hover');
-  });
-  document.addEventListener('mouseout', e=>{
-    if(e.target.closest && e.target.closest('a,button,.tile,.chip,[onclick],input,textarea,select')) cRing.classList.remove('hover');
-  });
-  document.documentElement.addEventListener('mouseleave', ()=>{ cDot.classList.remove('show'); cRing.classList.remove('show'); });
-  document.documentElement.addEventListener('mouseenter', ()=>{ cDot.classList.add('show'); cRing.classList.add('show'); });
-}
-
-AOS.init({ duration:700, once:true, offset:50 });
-</script>
+<script src="script.js"></script>
 </body>
 </html>

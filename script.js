@@ -65,12 +65,12 @@ const products = [...paketProducts, ...satuanProducts];
 
 /* ---------------- Database Arrays Pendukung Grid ---------------- */
 const treatments = [
-  { img: "Treatment/Foto 3.jpeg", alt: "Face Treatment Daftar Harga Bagian 1", category: "face" },
-  { img: "Treatment/Foto 4.jpeg", alt: "Face Treatment Daftar Harga Bagian 2", category: "face" },
-  { img: "Treatment/Foto 5.jpeg", alt: "Face Treatment Daftar Harga Bagian 3", category: "face" },
-  { img: "Treatment/Foto 2.jpeg", alt: "Peeling Treatment Daftar Harga Bagian 1", category: "peeling" },
+  { img: "Treatment/Foto 1.jpeg", alt: "Face Treatment Daftar Harga Bagian 1", category: "face" },
+  { img: "Treatment/Foto 2.jpeg", alt: "Face Treatment Daftar Harga Bagian 2", category: "face" },
+  { img: "Treatment/Foto 3.jpeg", alt: "Face Treatment Daftar Harga Bagian 3", category: "face" },
+  { img: "Treatment/Foto 4.jpeg", alt: "Peeling Treatment Daftar Harga Bagian 1", category: "peeling" },
   { img: "Treatment/Foto 6.jpeg", alt: "Peeling Treatment Daftar Harga Bagian 2", category: "peeling" },
-  { img: "Treatment/Foto 1.jpeg", alt: "Laser Treatment Daftar Harga", category: "laser" }
+  { img: "Treatment/Foto 5.jpeg", alt: "Laser Treatment Daftar Harga", category: "laser" }
 ];
 
 const testimonisData = Array.from({length: 15}, (_, i) => ({

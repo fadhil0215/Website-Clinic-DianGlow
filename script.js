@@ -356,12 +356,12 @@ const products = [
 
 const treatments = [
   {
-    img: 'Treatment/Foto 1.jpeg',
+    img: 'Treatment/Foto 2.jpeg',
     alt: 'Face Treatment Daftar Harga Bagian 1',
     category: 'face'
   },
   {
-    img: 'Treatment/Foto 2.jpeg',
+    img: 'Treatment/Foto 1.jpeg',
     alt: 'Face Treatment Daftar Harga Bagian 2',
     category: 'face'
   },
@@ -515,8 +515,8 @@ const contactBranchesDatabase = [
 const branchNames = [
   'Cabang Pontianak',
   'Cabang Ketapang',
-  'Cabang Singkawang',
-  'Cabang Sintang'
+  'Cabang Sintang',
+  'Cabang Singkawang'
 ];
 
 /* ---------------- THEME ---------------- */
